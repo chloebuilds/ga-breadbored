@@ -4,7 +4,7 @@ import { NotFound, Unauthorized } from '../lib/errors.js'
 
 async function breadIndex(_req, res, next) {
   try {
-    const breads = await Bread.find()
+    const breads = await Bread.find().populate('addedBy')
     return res.status(200).json(breads)
   } catch (err) {
     next(err)
