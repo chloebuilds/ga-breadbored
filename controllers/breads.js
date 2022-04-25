@@ -1,5 +1,5 @@
 
-import Bread from '..models/bread.js'
+import Bread from '../models/bread.js'
 import { NotFound, Unauthorized } from '../lib/errors.js'
 
 async function breadIndex(_req, res, next) {
