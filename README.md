@@ -1,6 +1,6 @@
 # Breadbored
 
-A teaching tool on the General Assembly Software Engineering Immersive for teaching students in how to use an API with CRUD functionality.
+A teaching tool on the General Assembly Software Engineering Immersive for teaching students in how to use a RESTful API with CRUD functionality.
 
 ## Technologies Used
 ### Backend
