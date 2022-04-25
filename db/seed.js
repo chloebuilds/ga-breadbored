@@ -1,7 +1,7 @@
 import Bread from '../models/bread.js'
 import User from '../models/user.js'
 import { connectToDb, truncateDb, disconnectDb } from './helpers.js'
-import breadsData from './data/breads.js'
+import breadData from './data/breads.js'
 
 async function seed() {
   try {
@@ -9,7 +9,7 @@ async function seed() {
     console.log('🍞 Database Connected 🍞')
 
     await truncateDb()
-    console.log('🫓 Database Dropped 🫓')
+    console.log('🫓  Database Dropped 🫓')
 
     const user = await User.create({
       username: 'admin',
@@ -21,7 +21,7 @@ async function seed() {
 
     console.log('🥖 Admin user created 🥖')
 
-    breadsData.forEach(bread => {
+    breadData.forEach(bread => {
       bread.addedBy = user
     })
 
@@ -35,7 +35,7 @@ async function seed() {
   }
 
   await disconnectDb()
-  console.log('🥪  Bye bye 🥪 ')
+  console.log('🥪 Bye bye 🥪 ')
 }
 
 seed()
