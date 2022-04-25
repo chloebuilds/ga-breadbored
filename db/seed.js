@@ -9,7 +9,7 @@ async function seed() {
     console.log('🍞 Database Connected 🍞')
 
     await truncateDb()
-    console.log('🫓 Database Dropped 🫓')
+    console.log('🫓  Database Dropped 🫓')
 
     const user = await User.create({
       username: 'admin',
@@ -35,7 +35,7 @@ async function seed() {
   }
 
   await disconnectDb()
-  console.log('🥪  Bye bye 🥪 ')
+  console.log('🥪 Bye bye 🥪 ')
 }
 
 seed()
