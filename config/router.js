@@ -11,7 +11,7 @@ router.route('/breads')
   .get(breadController.index)
   .post(secureRoute, breadController.create)
 
-router.route('/breads/:id')
+router.route('/breads/:breadId')
   .get(breadController.show)
   .delete(secureRoute, breadController.delete)
   .put(secureRoute, breadController.update)
@@ -19,7 +19,7 @@ router.route('/breads/:id')
 router.route('/breads/:breadId/comments')
   .post(secureRoute, breadController.commentCreate)
 
-router.route('/bread/:breadId/comments/:commentId')
+router.route('/breads/:breadId/comments/:commentId')
   .delete(secureRoute, breadController.commentDelete)
 
 router.post('/register', auth.register)
