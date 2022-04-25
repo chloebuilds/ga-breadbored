@@ -24,11 +24,11 @@ async function breadCreate(req, res, next) {
 async function breadShow(req, res, next) {
   const { breadId } = req.params
   try {
-    const foundbread = await Bread.findById(breadId)
+    const foundBread = await Bread.findById(breadId)
       .populate('addedBy')
       .populate('comments.addedBy')
 
-    if (!foundbread) {
+    if (!foundBread) {
       throw new NotFound()
     }
     return res.status(200).json(foundBread)
