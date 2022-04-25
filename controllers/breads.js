@@ -1,4 +1,4 @@
-import Bread from '..models/bread.js'
+import Bread from '../models/bread.js'
 
 async function breadIndex(_req, res, next) {
   try {
