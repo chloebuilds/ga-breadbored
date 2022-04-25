@@ -1,3 +1,3 @@
 # Breadbored
 
-A teaching tool for using an API with CRUD functionality.
+A teaching tool on the General Assembly Software Engineering Immersive for using an API with CRUD functionality.
