@@ -1,33 +1,41 @@
-import mongoose from 'mongoose'
-import connectToDb from './connectToDb.js'
 import Bread from '../models/bread.js'
-import breadData from './data/breads.js'
+import User from '../models/user.js'
+import { connectToDb, truncateDb, disconnectDb } from './helpers.js'
+import breadsData from './data/breads.js'
 
-async function seedDatabase() {
+async function seed() {
   try {
     await connectToDb()
-    console.log('Successfully connected to mongo')
+    console.log('🍞 Database Connected 🍞')
 
-    await mongoose.connection.db.dropDatabase()
-    console.log('Removed all bread 😭')
+    await truncateDb()
+    console.log('🫓 Database Dropped 🫓')
 
-    const bread = await Bread.create(breadData)
-    console.log(`🤖 ${bread.length} bread(s) baked!`) 
-    const myComment = {
-      text: 'My first comment',
-      user: users[0]._id,
-    }
-  
-    // Disconnect once finished..
-    await mongoose.connection.close()
-    console.log('🤖 Disconnected from mongo. !')
-  } catch (e) {
-    console.log('🤖 Something went wrong')
-    console.log(e)
-    await mongoose.connection.close()
+    const user = await User.create({
+      username: 'admin',
+      email: 'admin@email.com',
+      password: 'pass',
+      passwordConfirmation: 'pass',
+      isAdmin: true,
+    })
+
+    console.log('🥖 Admin user created 🥖')
+
+    breadsData.forEach(bread => {
+      bread.addedBy = user
+    })
+
+    const breads = await Bread.create(breadData)
+
+    console.log(`🍞 ${breads.length} breads added to Database - nom nom 🍞`)
+
+  } catch (err) {
+    console.log('🥺 Something went wrong - we need carbs stat 🥺')
+    console.log(err)
   }
+
+  await disconnectDb()
+  console.log('🥪  Bye bye 🥪 ')
 }
 
-seedDatabase()
-
-
+seed()
