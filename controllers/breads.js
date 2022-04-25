@@ -121,7 +121,7 @@ export default {
   create: breadCreate,
   show: breadShow,
   update: breadEdit,
-  delete: breadDelete,
+  remove: breadDelete,
   commentCreate: breadCommentCreate,
   commentDelete: breadCommentDelete
 }
