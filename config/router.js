@@ -19,8 +19,4 @@ router.route('/breads/:id')
   .delete(secureRoute, breadController.remove)
   .put(secureRoute, breadController.update)
 
-
-
-
-
 export default router
