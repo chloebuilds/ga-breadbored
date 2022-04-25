@@ -1,4 +1,5 @@
 import Bread from '..models/bread.js'
+import { NotFound, Unauthorized } from '../lib/errors.js'
 
 async function breadIndex(_req, res, next) {
   try {
@@ -9,6 +10,117 @@ async function breadIndex(_req, res, next) {
   }
 }
 
+async function breadCreate(req, res, next) {
+  const { currentUser } = req
+  try {
+    const createdBread = await Bread.create({ ...req.body, addedBy: currentUser })
+    return res.status(201),json(createdBread)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function breadShow(req, res, next) {
+  const { breadId } = req.params
+  try {
+    const foundbread = await Bread.findById(breadId)
+      .populate('addedBy')
+      .populate('comments.addedBy')
+
+    if (!foundbread) {
+      throw new NotFound()
+    }
+    return res.status(200).json(foundBread)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function breadEdit(req, res, next) {
+  const { breadId } = req.params
+  const { currentUserId } = req
+  try {
+    const breadToUpdate = await Bread.findById(breadId)
+    if (!breadToUpdate) {
+      throw new NotFound()
+    }
+    if (!breadToUpdate.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
+    }
+    Object.assign(breadToUpdate, req.body)
+    await breadToUpdate.save()
+    return res.status(202).json(breadToUpdate)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
+async function breadDelete(req, res, next) {
+  const { breadId } = req.params
+  const { currentUserId } = req
+  try {
+    const breadToDelete = await Bread.findById(breadId)
+    if (!breadToDelete) {
+      throw new NotFound()
+    }
+    if (!breadToDelete.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
+    }
+    await breadToDelete.remove()
+    return res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function breadCommentCreate(req, res, next) {
+  const { breadId } = req.params
+  const { currentUser } = req
+  try {
+    const commentedBread = await Bread.findById(breadId)
+    if (!commentedBread) {
+      throw new NotFound()
+    }
+    const createdComment = commentedBread.comments.create({ ...req.body, addedBy: currentUser })
+    commentedBread.comments.push(createdComment)
+    await commentedbread.save()
+    return res.status(201).json(createdComment)
+  } catch (err) {
+    next(err)
+  }
+}
+
+async function breadCommentDelete(req, res, next) {
+  const { breadId, commentId } = req.params
+  const { currentUserId } = req
+  try {
+    const bread = await Bread.findById(breadId)
+    if (!bread) {
+      throw new NotFound()
+    }
+    const commentToDelete = bread.comments.id(commentId)
+    if (!commentToDelete) {
+      throw new NotFound()
+    }
+    if (!commentToDelete.addedBy.equals(currentUserId)) {
+      throw new Unauthorized()
+    }
+    commentToDelete.remove()
+    await bread.save()
+    return res.sendStatus(204)
+  } catch (err) {
+    next(err)
+  }
+}
+
+
 export default {
-  index: breadIndex
+  index: breadIndex,
+  create: breadCreate,
+  show: breadShow,
+  update: breadEdit,
+  delete: breadDelete,
+  commentCreate: breadCommentCreate,
+  commentDelete: breadCommentDelete
 }
