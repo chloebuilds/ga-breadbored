@@ -4,13 +4,27 @@ import { connectToDb } from './db/helpers.js'
 import logger from './lib/logger.js'
 import errorHandler from './lib/errorHandler.js'
 import { port } from './config/environment.js'
+import cors from 'cors' 
+import 'dotenv/config' 
+// import path, { dirname } from 'path'
+// import { fileURLToPath } from 'url'
+
 
 const app = express()
 
 app.use(express.json())
+app.use(cors()) 
 app.use('/', logger)
-app.use(router)
+app.use('/api', router)
 app.use(errorHandler)
+
+// CONNECTING FRONT & BACK (for later :) )
+// const __filename = fileURLToPath(import.meta.url)
+// const __dirname = dirname(__filename)
+// app.use(express.static(path.join(__dirname, 'client', 'build')))
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+// })
 
 async function startSever() {
   try {

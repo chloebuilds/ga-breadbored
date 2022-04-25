@@ -13,7 +13,7 @@ router.route('/breads')
 
 router.route('/breads/:breadId')
   .get(breadController.show)
-  .delete(secureRoute, breadController.delete)
+  .delete(secureRoute, breadController.remove)
   .put(secureRoute, breadController.update)
 
 router.route('/breads/:breadId/comments')
