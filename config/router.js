@@ -1,6 +1,6 @@
 import express from 'express'
-import breadController from '../controllers/breadsana.js'
-import secureRoute from '../middleware/secureRoute.js'
+import breadController from '../controllers/breads'
+import secureRoute from '../lib/secureRoute.js'
 
 
 
