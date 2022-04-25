@@ -15,7 +15,7 @@ async function breadCreate(req, res, next) {
   const { currentUser } = req
   try {
     const createdBread = await Bread.create({ ...req.body, addedBy: currentUser })
-    return res.status(201),json(createdBread)
+    return res.status(201).json(createdBread)
   } catch (err) {
     next(err)
   }

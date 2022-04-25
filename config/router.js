@@ -13,13 +13,13 @@ router.route('/breads')
 
 router.route('/breads/:id')
   .get(breadController.show)
-  .delete(secureRoute, breadController.delete)
+  .delete(secureRoute, breadController.remove)
   .put(secureRoute, breadController.update)
 
 router.route('/breads/:breadId/comments')
   .post(secureRoute, breadController.commentCreate)
 
-router.route('/bread/:breadId/comments/:commentId')
+router.route('/breads/:breadId/comments/:commentId')
   .delete(secureRoute, breadController.commentDelete)
 
 router.post('/register', auth.register)
