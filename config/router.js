@@ -11,7 +11,7 @@ router.route('/breads')
   .get(breadController.index)
   .post(secureRoute, breadController.create)
 
-router.route('/breads/:id')
+router.route('/breads/:breadId')
   .get(breadController.show)
   .delete(secureRoute, breadController.remove)
   .put(secureRoute, breadController.update)

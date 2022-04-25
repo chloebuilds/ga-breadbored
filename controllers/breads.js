@@ -14,7 +14,7 @@ async function breadIndex(_req, res, next) {
 async function breadCreate(req, res, next) {
   const { currentUser } = req
   try {
-    const createdBread = await Bread.create({ ...req.body, addedBy: currentUser })
+    const createdBread = await Bread.create({ ...req.body, addedBy: currentUserId })
     return res.status(201).json(createdBread)
   } catch (err) {
     next(err)
@@ -77,15 +77,15 @@ async function breadDelete(req, res, next) {
 
 async function breadCommentCreate(req, res, next) {
   const { breadId } = req.params
-  const { currentUser } = req
+  const { currentUserId } = req
   try {
     const commentedBread = await Bread.findById(breadId)
     if (!commentedBread) {
       throw new NotFound()
     }
-    const createdComment = commentedBread.comments.create({ ...req.body, addedBy: currentUser })
+    const createdComment = commentedBread.comments.create({ ...req.body, addedBy: currentUserId })
     commentedBread.comments.push(createdComment)
-    await commentedbread.save()
+    await commentedBread.save()
     return res.status(201).json(createdComment)
   } catch (err) {
     next(err)
