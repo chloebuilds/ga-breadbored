@@ -15,7 +15,7 @@ const app = express()
 app.use(express.json())
 app.use(cors()) 
 app.use('/', logger)
-app.use('/api', router)
+app.use('/', router)
 app.use(errorHandler)
 
 // CONNECTING FRONT & BACK (for later :) )
