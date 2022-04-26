@@ -71,7 +71,7 @@ async function breadDelete(req, res, next) {
       throw new Unauthorized();
     }
     await breadToDelete.remove();
-    return res.sendStatus(204);
+    return res.status(204).send("Bread has been deleted :(", breadToDelete);
   } catch (err) {
     next(err);
   }
