@@ -68,7 +68,7 @@ export default [
   {
     name: 'Bagel', 
     origin: 'Poland', 
-    description: 'Bagels are usually made by boiling the dough in water for a short time then baking it afterward. They are round and come in two parts, with a hole in the center.',
+    description: 'Bagels are usually made by boiling the dough in water for a short time then baking it afterward. A round bread roll with a hole in the middle, a thin crust and an evenly aerated crumb. Often topped with seeds baked on the outer crust, commonly poppy seeds or sesame seeds.',
     image: 'https://imgur.com/3tw4WEN.jpeg',
   },
   {
@@ -80,7 +80,7 @@ export default [
   {
     name: 'Matkanash',
     origin: 'Armenia',
-    description: 'Means "finger draw" or "finger pull", referring to the way the bread is prepared.',
+    description: 'This large flatbread is easily recognised by its traditional oval shape and bold central lines. Means "finger draw" or "finger pull", referring to the way the bread is prepared.',
     image: 'https://imgur.com/4MSZyzE.jpeg'
   }
 ]
