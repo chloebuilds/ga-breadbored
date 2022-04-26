@@ -3,12 +3,15 @@
   "version": "1.0.0",
   "description": "A RESTful CRUD API for educational purposes",
   "main": "index.js",
+  "engines": {
+    "node": "16.x"
+  },
   "scripts": {
     "dev": "npx nodemon index.js",
     "start": "node index.js",
     "seed": "node db/seed.js",
     "test": "node --experimental-vm-modules --no-warnings  node_modules/.bin/jest -i --verbose --watch",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
+    "heroku-postbuild": "npm install --only=dev && npm install && npm run build"
   },
   "author": "",
   "license": "ISC",
