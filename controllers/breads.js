@@ -15,15 +15,16 @@ async function breadCreate(req, res, next) {
   const { currentUserId } = req;
   
   try {
+    const existingBread = await Bread.findOne({ name: req.body.name })
+
+    if(existingBread) throw new AlreadyExists
+
     const createdBread = await Bread.create({
       ...req.body,
       addedBy: currentUserId,
     });
     if(createdBread.name.includes('tiger')) throw new OhNoYouDidnt
 
-    const existingBread = await Bread.findOne({ name: req.body.name })
-
-    if(existingBread) throw new AlreadyExists
     
     return res.status(201).json(createdBread);
   } catch (err) {
